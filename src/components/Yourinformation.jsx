@@ -19,6 +19,7 @@ const YourInformation = () => {
         steetAdress: "",
         City: "",
         phone: "",
+        Country: "",
       }}
       validationSchema={Yup.object().shape({
         name: Yup.string().required("Name cannot be empty"),
@@ -37,6 +38,8 @@ const YourInformation = () => {
         email: Yup.string()
           .email("Looks like this is not an email")
           .required("Required"),
+          Country: Yup.string()
+          .required("Enter Country"),
         password: Yup.string()
           .min(8, "Password must be at least 8 characters")
           .matches(
@@ -161,7 +164,7 @@ const YourInformation = () => {
                   />
                 </div>
                 <div className="field-wrapper">
-                  <p>Last Name *</p>
+                  <p>Country *</p>
                   <Field
                     id="Country"
                     name="Country"
