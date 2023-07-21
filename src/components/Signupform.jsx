@@ -8,7 +8,7 @@ const SignupForm = () => {
 
   useEffect(() => {
     // Make the API call to retrieve the options data
-    fetch("http://localhost:5000/data")
+    fetch("http://localhost:5000/data")  //npx json-server --watch db.json --port 5000
       .then((response) => response.json())
       .then((data) => {
         setOptionsData(data);
@@ -57,25 +57,29 @@ const SignupForm = () => {
             <div className="inside-wrapper">
               <div className="field-wrapper">
                 <p>Bussines type *</p>
-                <select
-                  id="select"
-                  name="select"
-                  value={values.select}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  className={
-                    errors.select && touched.select
-                      ? "text-input error"
-                      : "text-input"
-                  }
-                >
-                  <option value="">- Select -</option>
-                  {optionsData.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+                {optionsData.length > 0 ? (
+                  <select
+                    id="select"
+                    name="select"
+                    value={values.select}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={
+                      errors.select && touched.select
+                        ? "text-input error"
+                        : "text-input"
+                    }
+                  >
+                    <option value="">- Select -</option>
+                    {optionsData.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <p>Loading options...</p>
+                )}
               </div>
               <ErrorMessage
                 name="select"
