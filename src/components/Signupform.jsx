@@ -1,6 +1,12 @@
 import React from "react";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import * as Yup from "yup";
+const optionsData = [
+  { value: "option1", label: "Option 1" },
+  { value: "option2", label: "Option 2" },
+  { value: "option3", label: "Option 3" },
+  // Add more options as needed
+];
 
 const SignupForm = () => {
   return (
@@ -55,9 +61,11 @@ const SignupForm = () => {
                   }
                 >
                   <option value="">- Select -</option>
-                  <option value="option1">Option 1</option>
-                  <option value="option2">Option 2</option>
-                  <option value="option3">Option 3</option>
+                  {optionsData.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
                 </select>
               </div>
               <ErrorMessage
