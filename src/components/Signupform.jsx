@@ -1,14 +1,23 @@
 import React from "react";
 import { Formik, Field, ErrorMessage, Form } from "formik";
 import * as Yup from "yup";
-const optionsData = [
-  { value: "option1", label: "Option 1" },
-  { value: "option2", label: "Option 2" },
-  { value: "option3", label: "Option 3" },
-  // Add more options as needed
-];
+import { useState, useEffect } from "react";
 
 const SignupForm = () => {
+  const [optionsData, setOptionsData] = useState([]);
+
+  useEffect(() => {
+    // Make the API call to retrieve the options data
+    fetch("http://localhost:5000/data")
+      .then((response) => response.json())
+      .then((data) => {
+        setOptionsData(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching options data:", error);
+      });
+  }, []);
+
   return (
     <Formik
       initialValues={{
